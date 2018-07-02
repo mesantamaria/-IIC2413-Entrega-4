@@ -74,7 +74,7 @@ def find_palabra(palabra_clave):
     output = []
     for doc in mongodb.mensajes.find({"contenido": {"$regex": palabra_clave,
                                                     "$options": "i"}}):
-        output.append(doc['contenido'])
+        output.append({'nombre': doc['nombre'] , 'contenido':doc['contenido']})
     return jsonify(output)
 
 
