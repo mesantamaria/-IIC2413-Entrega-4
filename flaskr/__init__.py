@@ -72,7 +72,8 @@ def find_last_alias(uname):
 @app.route("/contenidos/<palabra_clave>", methods=['GET'])
 def find_palabra(palabra_clave):
     output = []
-    for doc in mongodb.mensajes.find({"contenido": {"$regex": palabra_clave}}):
+    for doc in mongodb.mensajes.find({"contenido": {"$regex": palabra_clave,
+                                                    "$options": "i"}}):
         output.append(doc['contenido'])
     return jsonify(output)
 
