@@ -63,9 +63,19 @@ def find_user(uname):
 @app.route("/ultimo_alias/<uname>", methods=['GET'])
 def find_last_alias(uname):
     output = []
-    #doc = mongodb.mensajes.find({"nombre": uname}).sort({"fecha": 1})
-    for doc in mongodb.mensajes.find({"nombre": uname}).sort("fecha", -1):
-        output.append({'alias': doc['alias'], 'fecha': doc['fecha']})
+    doc = mongodb.mensajes.find_one({"nombre": uname}).sort("fecha", -1)
+    if doc:
+        output = {"alias": doc['alias']}
+    else:
+        output = "No such name"
+    return jsonify(output)
+
+
+@app.route("/contenidos/<palabra_clave>", methods=['GET'])
+def find_last_alias(palabra_clave):
+    output = []
+    for doc in mongodb.mensajes.find({"contenido": {"$regex": palabra_clave}}):
+        output.append(doc['contenido'])
     return jsonify(output)
 
 
