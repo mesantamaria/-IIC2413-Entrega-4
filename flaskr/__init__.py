@@ -55,11 +55,8 @@ def mongo():
 @app.route("/users/<uname>", methods=['GET'])
 def find_user(uname):
     output = []
-    doc = mongodb.mensajes.find({"nombre": uname})
-    if doc:
-        output = {"alias": doc['alias'], "nombre": doc['nombre']}
-    else:
-        output = "No such name"
+    for doc in mongodb.mensajes.find({"nombre": uname}):
+        output.append(doc['alias'])
     return jsonify(output)
 
 
