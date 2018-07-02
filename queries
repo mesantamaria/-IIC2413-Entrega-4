@@ -1,34 +1,22 @@
 [
   {
-    "name": "Seleccionar todo",
-    "database": "postgres",
-    "description": "Una muy breve descripción",
-    "query": "SELECT * FROM mytable;"
-  },
-  {
-  "name": "Lorem ipsum dolor sit amet",
+  "name": "Obtener todos los alias según nombre",
   "database": "mongo",
   "description":
-  "Vestibulum vulputate metus at nisl lacinia blandit. Quisque fermentum sagittis mi",
-  "query": "myCollection.find( {\"attribute\": \"value\"} )"
+  "Para filtrar por nombre poner en la url /users/<Nombre buscado>",
+  "query": "mensajes.find( {\"nombre\": \"Alvaro\"} )"
   },
   {
-    "name": "Sebastián",
-    "database": "postgres",
-    "description": "Una consulta de Sebastián 🙋",
-    "query": "SELECT * FROM mytable WHERE nombre='Sebastián';"
-  },
-  {
-    "name": "Quiero todo de mongo 😄",
+    "name": "Obtener último alias de un nombre",
     "database": "mongo",
-    "description": "...",
-    "query": "myCollection.find()"
+    "description": "Para filtrar por nombre poner en la url /ultimo_alias/<Nombre buscado>,
+    "query": "mensajes.find( {\"nombre\": \"Alvaro\"} ).sort("fecha", -1)"
   },
   {
-    "name": "Insertar a mongo",
+    "name": "Buscar palabra clave en contenido",
     "database": "mongo",
     "description":
-      "Vestibulum vulputate metus at nisl lacinia blandit. Quisque fermentum sagittis mi",
-    "query": "myCollection.insert( { \"attribute\": \"value\" } )"
+      "Para filtrar por palabra clave poner en la url /contenidos/<Palabra clave>",
+    "query": "mensajes.find( { \"contenido\": {\"$regex: banco\"} } )"
   }
 ]
