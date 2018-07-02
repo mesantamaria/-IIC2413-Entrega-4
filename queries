@@ -3,20 +3,7 @@
   "name": "Obtener todos los alias segun nombre",
   "database": "mongo",
   "description":
-  "Para filtrar por nombre poner en la url /users/Nombre buscado",
+  "Para filtrar por nombre poner en la url usersNombre buscado",
   "query": "mensajes.find( {\"nombre\": \"Alvaro\"} )"
-  },
-  {
-    "name": "Obtener ultimo alias de un nombre",
-    "database": "mongo",
-    "description": "Para filtrar por nombre poner en la url /ultimo_alias/Nombre buscado,
-    "query": "mensajes.find( {\"nombre\": \"Alvaro\"} ).sort("fecha", -1)"
-  },
-  {
-    "name": "Buscar palabra clave en contenido",
-    "database": "mongo",
-    "description":
-      "Para filtrar por palabra clave poner en la url /contenidos/Palabra clave",
-    "query": "mensajes.find( { \"contenido\": {\"$regex: banco\"} } )"
   }
 ]
