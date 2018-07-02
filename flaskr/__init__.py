@@ -64,7 +64,7 @@ def find_user(uname):
 def find_last_alias(uname):
     output = []
     #doc = mongodb.mensajes.find({"nombre": uname}).sort({"fecha": 1})
-    for doc in mongodb.mensajes.find({"nombre": uname}).sort({"numero": 1}):
+    for doc in mongodb.mensajes.find({"nombre": uname}).sort("fecha", -1):
         output.append({'alias': doc['alias'], 'fecha': doc['fecha']})
     return jsonify(output)
 
