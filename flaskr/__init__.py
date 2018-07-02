@@ -61,7 +61,7 @@ def find_user(uname):
 
 
 @app.route("/ultimo_alias/<uname>", methods=['GET'])
-def find_user(uname):
+def find_last_alias(uname):
     output = []
     doc = mongodb.mensajes.find({"nombre": uname}).sort({"fecha": -1})
     for doc in mongodb.mensajes.find({"nombre": uname}).sort({"fecha": -1}):
