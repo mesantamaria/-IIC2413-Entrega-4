@@ -55,8 +55,17 @@ def mongo():
 @app.route("/users/<uname>", methods=['GET'])
 def find_user(uname):
     output = []
-    for doc in mongodb.mensajes.find({"nombre": uname}, {"alias": 1}):
-        output.append(doc)
+    for doc in mongodb.mensajes.find({"nombre": uname}):
+        output.append(doc['alias'])
+    return jsonify(output)
+
+
+@app.route("/ultimo_alias/<uname>", methods=['GET'])
+def find_user(uname):
+    output = []
+    doc = mongodb.mensajes.find({"nombre": uname}).sort({"fecha": -1})
+    for doc in mongodb.mensajes.find({"nombre": uname}).sort({"fecha": -1}):
+        output.append({'alias': doc['alias'], 'fecha': doc['fecha']})
     return jsonify(output)
 
 
