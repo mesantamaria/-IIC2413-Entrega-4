@@ -17,25 +17,17 @@ def create_app():
 app = create_app()
 
 # REPLACE WITH YOUR DATABASE NAME
-MONGODATABASE = "myDatabase"
+MONGODATABASE = "data"
 MONGOSERVER = "localhost"
 MONGOPORT = 27017
 client = MongoClient(MONGOSERVER, MONGOPORT)
 mongodb = client[MONGODATABASE]
 
-''' # Uncomment for postgres connection
-# REPLACE WITH YOUR DATABASE NAME, USER AND PASS
-POSTGRESDATABASE = "mydatabase"
-POSTGRESUSER = "myuser"
-POSTGRESPASS = "mypass"
-postgresdb = psycopg2.connect(
-    database=POSTGRESDATABASE,
-    user=POSTGRESUSER,
-    password=POSTGRESPASS)
-'''
 
 #Cambiar por Path Absoluto en el servidor
 QUERIES_FILENAME = 'queries'
+QUERIES_FILENAME = '/var/www/Entrega4/queries'
+
 
 
 @app.route("/")
@@ -58,16 +50,6 @@ def mongo():
         return render_template('mongo.html', results=results)
     else:
         return "ok"
-
-
-@app.route("/postgres")
-def postgres():
-    query = request.args.get("query")
-    cursor = postgresdb.cursor()
-    cursor.execute(query)
-    results = [[a for a in result] for result in cursor]
-    print(results)
-    return render_template('postgres.html', results=results)
 
 
 @app.route("/example")
