@@ -7,7 +7,7 @@ import json
 from bson import json_util
 from pymongo import MongoClient
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash
+     render_template, flash, jsonify
 
 
 def create_app():
@@ -50,6 +50,17 @@ def mongo():
         return render_template('mongo.html', results=results)
     else:
         return "ok"
+
+
+@app.route("/users/<uname>", methods=['GET'])
+def find_user(uname):
+    output = []
+    doc = mongodb.mensajes.find({"nombre": uname})
+    if doc:
+        output = {"alias": doc['alias'], "nombre": doc['nombre']}
+    else:
+        output = "No such name"
+    return jsonify(output)
 
 
 @app.route("/example")
