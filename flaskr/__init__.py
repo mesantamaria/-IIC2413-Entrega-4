@@ -56,7 +56,8 @@ def mongo():
 def find_user(uname):
     output = []
     for doc in mongodb.mensajes.find({"nombre": uname}):
-        output.append(doc['alias'])
+        if doc['alias'] not in output:
+            output.append(doc['alias'])
     return jsonify(output)
 
 
