@@ -78,6 +78,15 @@ def find_palabra(palabra_clave):
     return jsonify(output)
 
 
+@app.route("/users")
+def all_users():
+    output = []
+    for doc in mongodb.mensajes.find():
+        if doc['nombre'] not in output:
+            output.append(doc['nombre'])
+    return jsonify(output)
+
+
 @app.route("/example")
 def example():
     return render_template('example.html')
